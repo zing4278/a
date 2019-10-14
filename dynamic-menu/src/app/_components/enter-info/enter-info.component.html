@@ -1,0 +1,52 @@
+<p>
+  enter-info works!
+</p>
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12 col-md-6 col-md-offset-3">
+    
+        <h2>Enter the name of Menu</h2>
+        <ul>
+          <li *ngFor="let nav of navigation">
+            {{nav.name}}
+            {{nav.age}}
+            
+            <button (click)="deleteNavigation(nav.name)">Delete Nav</button>
+          </li>
+        </ul>
+
+        <form #menuForm="ngForm" (submit)="addNavigation()">
+          <input type="text" [(ngModel)]="navName" name="name" >
+          <input type="text" [(ngModel)]="urlLink" name="link" >
+          <input (ngModelChange)="setColor($event)"
+          [ngModel]="linkColor" name="Color" [(colorPicker)]="color" [style.background]="color"/>
+          <button type="submit">Add Nav</button>
+         
+        </form>
+        <div>{{ menuForm.value | json }} </div>  
+        <!-- [ngStyle]="setColor()" -->
+        <div *ngFor="let nav of navigation" [style.background]="color" class="{{color}}">
+          {{nav.navname}}
+          {{nav.urlLink}}
+          {{color}}
+        </div>
+
+        <div class="container">
+          <div class="nav">
+            <div class="row">
+              <ul>
+                <li *ngFor="let nav of navigation"><a routerLink="/{{nav.name}}"> {{nav.name}}</a></li>
+              </ul>
+              
+            </div>
+            <router-outlet></router-outlet>
+          </div>
+        </div>
+        
+        <!-- <div>{{postForm.value | Json}}</div>       -->
+       
+            
+    </div>
+  </div>
+ 
+</div>
