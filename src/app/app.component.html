@@ -1,0 +1,32 @@
+<!-- main app container -->
+<div class="card m-3">
+  <h5 class="card-header">Form Validation</h5>
+  <div class="card-body">
+      <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+            <label>Email</label>
+            <input type="text" formControlName="email" class="form-control"
+             [ngClass]="{ 'is-invalid': submitted && f.email.errors }"/>
+              <div *ngIf="submitted && myForm.get('email').errors &&
+                          myForm.get('email').errors.validEmail">
+                          Email is required</div>
+        </div>
+          <div class="form-group">
+              <label>URL</label>
+              <input type="text" formControlName="websiteUrl" class="form-control" />
+            <div *ngIf="submitted && myForm.get('websiteUrl').errors &&
+                        myForm.get('websiteUrl').errors.validUrl
+                        ">
+                    Oops, only urls served over https and only from the .io top-level domain are accepted.
+                    Talk about restrictions!
+            </div>
+          </div>
+
+          <div class="text-center">
+              <button class="btn btn-primary mr-1">Register</button>
+              <!-- <button class="btn btn-secondary" type="reset" (click)="onReset()">Cancel</button> -->
+          </div>
+
+      </form>
+  </div>
+</div>
